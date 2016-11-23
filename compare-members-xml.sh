@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
 
+CURL=/usr/bin/curl
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 URL=http://clerk.house.gov/xml/lists/MemberData.xml
 CACHEFLDR=$DIR/cache
 TMPFILE=$(mktemp)
-curl "$URL" > $TMPFILE
+$CURL -s "$URL" > $TMPFILE
 cd $CACHEFLDR
 LATEST=$(ls -t MemberData* | head -1)
 
